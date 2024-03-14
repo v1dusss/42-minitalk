@@ -1,6 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/14 14:38:27 by vsivanat          #+#    #+#              #
+#    Updated: 2024/03/14 17:06:13 by vsivanat         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
+
+LIBFT = libft/libft.a
 
 SERVER = server
 CLIENT = client
@@ -23,21 +37,21 @@ BONUS_CLIENT_OBJS = $(BONUS_CLIENT_SRCS:.c=.o)
 
 all: $(SERVER) $(CLIENT)
 
-lib:
+$(LIBFT):
 	make -C ./libft
 
-$(SERVER): $(SV_OBJS) lib
+$(SERVER): $(SV_OBJS) $(LIBFT) minitalk.h
 	$(CC) $(CFLAGS) $(SV_OBJS) -o $(SERVER) -L./libft -lft
 
-$(CLIENT): $(CLIENT_OBJS) lib
+$(CLIENT): $(CLIENT_OBJS) $(LIBFT) minitalk.h
 	$(CC) $(CFLAGS) $(CLIENT_OBJS) -o $(CLIENT) -L./libft -lft
 
 bonus: $(BONUS_SERVER) $(BONUS_CLIENT)
 
-$(BONUS_SERVER): $(BONUS_SV_OBJS) lib
+$(BONUS_SERVER): $(BONUS_SV_OBJS) $(LIBFT) minitalk.h
 	$(CC) $(CFLAGS) $(BONUS_SV_OBJS) -o $(BONUS_SERVER) -L./libft -lft
 
-$(BONUS_CLIENT): $(BONUS_CLIENT_OBJS) lib
+$(BONUS_CLIENT): $(BONUS_CLIENT_OBJS) $(LIBFT) minitalk.h
 	$(CC) $(CFLAGS) $(BONUS_CLIENT_OBJS) -o $(BONUS_CLIENT) -L./libft -lft
 
 clean:
@@ -50,3 +64,5 @@ fclean: clean
 	$(RM) $(BONUS_SERVER) $(BONUS_CLIENT)
 
 re: fclean all
+
+.PHONY: all re clean fclean

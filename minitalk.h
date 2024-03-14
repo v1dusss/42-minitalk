@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:08:02 by vsivanat          #+#    #+#             */
-/*   Updated: 2024/03/13 16:36:43 by vsivanat         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:06:17 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define MINITALK_H
 
 # include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <signal.h>
 
 typedef struct s_server

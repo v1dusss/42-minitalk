@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:58:18 by vsivanat          #+#    #+#             */
-/*   Updated: 2024/03/13 16:35:22 by vsivanat         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:38:42 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@ void	send_message(char *message, int server_pid)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (message[i] != '\0')
+	i = -1;
+	while (message[++i] != '\0')
 	{
-		while (j < 8)
+		j = -1;
+		while (++j < 8)
 		{
 			if (message[i] & (1 << j))
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
 			usleep(69);
-			j++;
 		}
-		j = 0;
-		i++;
 	}
+	j = -1;
 	while (j++ < 8)
 	{
 		kill(server_pid, SIGUSR2);
